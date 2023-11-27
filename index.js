@@ -3,7 +3,8 @@ const express = require("express");
 const app = express();
 
 //use .env
-const dotenv = require("dotenv");
+require('dotenv').config();
+
 
 const axios = require("axios");
 
@@ -21,7 +22,7 @@ app.listen(process.env.PORT || 5500, () => {
 //post data to line notify
 app.get("/electric", async (req, res) => {
   try {
-    const response = await axios.get(dotenv.config().parsed.ELECTRIC_URL);
+    const response = await axios.get(process.env.ELECTRIC_DOWN_URL);
     const data = response.data;
     // const results = JSON.parse(data);
     const station = data[0].station;
@@ -53,7 +54,7 @@ app.get("/electric", async (req, res) => {
       {
         headers: {
           "Content-Type": "multipart/form-data",
-          Authorization: `Bearer ${dotenv.config().parsed.LINE_NOTIFY_THOKEN}`,
+          Authorization: `Bearer ${process.env.LINE_NOTIFY_THOKEN}`,
         },
       }
     );
@@ -66,7 +67,7 @@ app.get("/electric", async (req, res) => {
 
 app.get("/nt", async (req, res) => {
   try {
-    const response = await axios.get(dotenv.config().parsed.NT_DOWN_URL);
+    const response = await axios.get(process.env.NT_DOWN_URL);
     const data = response.data;
     // const results = JSON.parse(data);
     const station = data[0].station;
@@ -98,7 +99,7 @@ app.get("/nt", async (req, res) => {
       {
         headers: {
           "Content-Type": "multipart/form-data",
-          Authorization: `Bearer ${dotenv.config().parsed.LINE_NOTIFY_THOKEN}`,
+          Authorization: `Bearer ${process.env.LINE_NOTIFY_THOKEN}`,
         },
       }
     );
