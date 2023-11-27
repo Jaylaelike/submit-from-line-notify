@@ -22,7 +22,7 @@ app.listen(process.env.PORT || 5500, () => {
 //post data to line notify
 app.get("/electric", async (req, res) => {
   try {
-    const response = await axios.get(process.env.ELECTRIC_DOWN_URL);
+    const response = await axios.get(process.env.ELECTRIC_URL);
     const data = response.data;
     // const results = JSON.parse(data);
     const station = data[0].station;
